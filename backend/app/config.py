@@ -3,7 +3,6 @@
 from pydantic_settings import BaseSettings
 from typing import List
 
-
 class Settings(BaseSettings):
     # ----------------------------
     # Application Settings
@@ -13,10 +12,9 @@ class Settings(BaseSettings):
     DEBUG: bool = True
 
     # ----------------------------
-    # MongoDB Settings
+    # SQLAlchemy / Relational DB Settings
     # ----------------------------
-    MONGODB_URL: str = "mongodb://localhost:27017"
-    DATABASE_NAME: str = "resumate_db"
+    SQLALCHEMY_DATABASE_URL: str = "sqlite:///./resumate.db"  # SQLite for dev, change to PostgreSQL in prod
 
     # ----------------------------
     # JWT Authentication Settings
@@ -28,7 +26,7 @@ class Settings(BaseSettings):
     # ----------------------------
     # CORS Settings
     # ----------------------------
-    ALLOWED_ORIGINS: List[str] = ["*"]  # Change in production
+    ALLOWED_ORIGINS: List[str] = ["http://localhost:3000"]  # Add frontend URLs
 
     # ----------------------------
     # File Upload Settings
@@ -40,6 +38,5 @@ class Settings(BaseSettings):
         env_file = ".env"
         case_sensitive = True
 
-
-# Create a single settings object
+# Single settings object
 settings = Settings()
