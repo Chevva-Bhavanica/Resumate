@@ -3,6 +3,8 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from app.database.db_connection import create_tables
+
 
 from app.routes import (
     auth_routes,
@@ -70,6 +72,7 @@ app.add_exception_handler(RequestValidationError, validation_exception_handler)
 @app.on_event("startup")
 def startup_event():
     # Create tables if not exists (for SQLAlchemy)
+    create_tables()
     Base.metadata.create_all(bind=engine)
     print("Application Startup: Database tables ready.")
 
