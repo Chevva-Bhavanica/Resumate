@@ -71,12 +71,12 @@ app.add_exception_handler(RequestValidationError, validation_exception_handler)
 def startup_event():
     # Create tables if not exists (for SQLAlchemy)
     Base.metadata.create_all(bind=engine)
-    print("✅ Application Startup: Database tables ready.")
+    print("Application Startup: Database tables ready.")
 
 
 @app.on_event("shutdown")
 def shutdown_event():
-    print("⚡ Application Shutdown: Goodbye!")
+    print("Application Shutdown: Goodbye!")
 
 
 # --------------------------------------------------
