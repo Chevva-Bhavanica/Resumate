@@ -1,33 +1,24 @@
 # app/database/db_connection.py
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base, Session
+from sqlalchemy.orm import sessionmaker
 from app.config import settings
+from app.database.base import Base
 
-# --------------------------------------------------
-# SQLAlchemy Engine
-# --------------------------------------------------
-engine = create_engine(
-    settings.SQLALCHEMY_DATABASE_URL,
-    connect_args={"check_same_thread": False} if "sqlite" in settings.SQLALCHEMY_DATABASE_URL else {}
-)
+# Example: PostgreSQL URL
+DATABASE_URL = settings.SQLALCHEMY_DATABASE_URL  # e.g., "postgresql+psycopg2://user:pass@localhost/resumate_db"
 
-# --------------------------------------------------
-# SessionLocal for Dependency Injection
-# --------------------------------------------------
+engine = create_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# --------------------------------------------------
-# Base class for models
-# --------------------------------------------------
-Base = declarative_base()
-
-# --------------------------------------------------
 # Dependency for FastAPI routes
-# --------------------------------------------------
 def get_db():
-    db: Session = SessionLocal()
+    db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
+
+# Call this once at startup to create all tables automatically
+def create_tables():
+    Base.metadata.create_all(bind=engine)
