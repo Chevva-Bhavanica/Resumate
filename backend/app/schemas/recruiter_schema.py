@@ -1,38 +1,40 @@
 # app/schemas/recruiter_schema.py
 
-from pydantic import BaseModel, EmailStr, Field
-from typing import Optional, List
-from datetime import datetime
+from pydantic import BaseModel, EmailStr
+from typing import Optional
+from uuid import UUID
 
-# --------------------------------------------------
-# Base Recruiter Schema
-# --------------------------------------------------
+
+# ----------------------------
+# Recruiter Base Schema (common fields)
+# ----------------------------
 class RecruiterBase(BaseModel):
-    company_name: Optional[str] = Field(None, max_length=150)
-    phone: Optional[str] = Field(None, max_length=20)
-    location: Optional[str] = Field(None, max_length=100)
-    bio: Optional[str] = Field(None, max_length=1000)
+    company: Optional[str]
+    phone: Optional[str]
+    location: Optional[str]
+    bio: Optional[str]
 
-# --------------------------------------------------
-# Create Recruiter Profile
-# --------------------------------------------------
+
+# ----------------------------
+# Recruiter Create Schema
+# ----------------------------
 class RecruiterCreate(RecruiterBase):
-    user_id: str
+    user_id: UUID  # Must be linked to existing user
 
-# --------------------------------------------------
-# Update Recruiter Profile
-# --------------------------------------------------
+
+# ----------------------------
+# Recruiter Update Schema
+# ----------------------------
 class RecruiterUpdate(RecruiterBase):
-    pass  # All optional for partial updates
+    pass  # Optional fields can be updated
 
-# --------------------------------------------------
-# Recruiter Response
-# --------------------------------------------------
+
+# ----------------------------
+# Recruiter Response Schema
+# ----------------------------
 class RecruiterResponse(RecruiterBase):
-    id: str
-    user_id: str
-    created_at: datetime
-    updated_at: Optional[datetime] = None
+    id: UUID
+    user_id: UUID
 
     class Config:
         orm_mode = True
