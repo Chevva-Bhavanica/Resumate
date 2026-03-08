@@ -5,10 +5,201 @@
 
 <title>Resumate - AI Resume Screening</title>
 
-<link rel="stylesheet" href="style.css">
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
+<style>
+
+body{
+font-family:'Poppins',sans-serif;
+margin:0;
+background:#f4f7ff;
+}
+
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+background:white;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.logo{
+color:#4f46e5;
+}
+
+nav button{
+margin-left:15px;
+background:none;
+border:none;
+font-size:16px;
+cursor:pointer;
+}
+
+nav button:hover{
+color:#4f46e5;
+}
+
+/* HERO */
+
+.hero{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:80px;
+background:linear-gradient(120deg,#4f46e5,#6366f1);
+color:white;
+animation:fadeIn 1s;
+}
+
+.hero img{
+width:400px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.primary-btn{
+margin-top:20px;
+padding:12px 25px;
+background:white;
+color:#4f46e5;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.primary-btn:hover{
+transform:scale(1.05);
+}
+
+/* FEATURES */
+
+.features{
+padding:80px;
+text-align:center;
+animation:fadeIn 1s;
+}
+
+.feature-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+margin-top:40px;
+}
+
+.feature-card{
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+transition:0.4s;
+cursor:pointer;
+}
+
+.feature-card:hover{
+transform:translateY(-10px) scale(1.05);
+}
+
+.feature-card img{
+width:80px;
+}
+
+/* FORM */
+
+.form-box{
+background:white;
+padding:40px;
+width:300px;
+margin:auto;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.15);
+animation:fadeIn 0.8s;
+}
+
+.form-box input,select{
+width:100%;
+padding:10px;
+margin-top:15px;
+}
+
+.form-box button{
+margin-top:20px;
+width:100%;
+padding:10px;
+background:#4f46e5;
+color:white;
+border:none;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+padding:60px;
+animation:fadeIn 1s;
+}
+
+.stats{
+display:flex;
+gap:30px;
+}
+
+.stat-card{
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+width:200px;
+text-align:center;
+transition:0.3s;
+}
+
+.stat-card:hover{
+transform:scale(1.08);
+}
+
+/* JOB CARDS */
+
+.job-grid{
+display:flex;
+gap:30px;
+padding:40px;
+}
+
+.job-card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+width:250px;
+transition:0.3s;
+}
+
+.job-card:hover{
+transform:scale(1.05);
+}
+
+/* PAGE CONTROL */
+
+.page{
+display:none;
+padding:40px;
+}
+
+/* ANIMATION */
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+</style>
 </head>
 
 <body>
@@ -22,74 +213,71 @@
 <div>
 
 <button onclick="showPage('home')">Home</button>
-<button onclick="showPage('about')">About</button>
-<button onclick="showPage('dashboard')">Dashboard</button>
-<button onclick="showPage('jobs')">Jobs</button>
+<button onclick="showPage('features')">Features</button>
 <button onclick="showPage('login')">Login</button>
+<button onclick="showPage('register')">Register</button>
 
 </div>
 
 </nav>
 
-<!-- HOME PAGE -->
+<!-- HOME -->
 
 <section id="home" class="page hero">
 
-<div class="hero-text">
+<div>
 
 <h1>AI Powered Resume Screening</h1>
 
 <p>
-Automate recruitment and discover the best candidates
-using intelligent resume analysis.
+Automate recruitment and discover the best candidates using intelligent resume analysis.
 </p>
 
-<button onclick="showPage('login')" class="primary-btn">
+<button class="primary-btn" onclick="showPage('login')">
 Get Started
 </button>
 
 </div>
 
-<img class="hero-img"
-src="https://images.unsplash.com/photo-1552664730-d307ca884978">
+<img src="https://images.unsplash.com/photo-1552664730-d307ca884978">
 
 </section>
 
 <!-- FEATURES -->
 
-<section class="features page" id="about">
+<section id="features" class="page features">
 
 <h2>Platform Features</h2>
 
 <div class="feature-grid">
 
-<div class="feature-card">
+<div class="feature-card" onclick="showPage('resumeBuilder')">
 
 <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
 
-<h3>AI Resume Screening</h3>
+<h3>AI Resume Builder</h3>
 
-<p>Automatically rank candidates using intelligent skill matching.</p>
-
-</div>
-
-<div class="feature-card">
-
-<img src="https://cdn-icons-png.flaticon.com/512/9068/9068753.png">
-
-<h3>Resume Builder</h3>
-
-<p>Create professional resumes using AI-generated templates.</p>
+<p>Create resumes automatically using AI.</p>
 
 </div>
 
-<div class="feature-card">
+<div class="feature-card" onclick="showPage('jobs')">
 
 <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png">
 
 <h3>Job Recommendations</h3>
 
-<p>Get personalized job suggestions based on your skills.</p>
+<p>Get jobs matching your skills.</p>
+
+</div>
+
+<div class="feature-card" onclick="showPage('candidateDashboard')">
+
+<img src="https://cdn-icons-png.flaticon.com/512/9068/9068753.png">
+
+<h3>Smart Dashboard</h3>
+
+<p>Track applications and recommendations.</p>
 
 </div>
 
@@ -97,9 +285,60 @@ src="https://images.unsplash.com/photo-1552664730-d307ca884978">
 
 </section>
 
-<!-- DASHBOARD -->
+<!-- LOGIN -->
 
-<section id="dashboard" class="page dashboard">
+<section id="login" class="page">
+
+<div class="form-box">
+
+<h2>User Login</h2>
+
+<input placeholder="Email">
+
+<input type="password" placeholder="Password">
+
+<select id="role">
+
+<option value="candidate">Candidate</option>
+<option value="recruiter">Recruiter</option>
+<option value="admin">Admin</option>
+
+</select>
+
+<button onclick="login()">Login</button>
+
+</div>
+
+</section>
+
+<!-- REGISTER -->
+
+<section id="register" class="page">
+
+<div class="form-box">
+
+<h2>Register</h2>
+
+<input placeholder="Name">
+<input placeholder="Email">
+<input type="password" placeholder="Password">
+
+<select>
+
+<option>Candidate</option>
+<option>Recruiter</option>
+
+</select>
+
+<button>Register</button>
+
+</div>
+
+</section>
+
+<!-- CANDIDATE DASHBOARD -->
+
+<section id="candidateDashboard" class="page dashboard">
 
 <h2>Candidate Dashboard</h2>
 
@@ -121,8 +360,8 @@ src="https://images.unsplash.com/photo-1552664730-d307ca884978">
 
 <div class="stat-card">
 
-<h3>AI Recommendations</h3>
-<p>8</p>
+<h3>AI Matches</h3>
+<p>6</p>
 
 </div>
 
@@ -130,7 +369,25 @@ src="https://images.unsplash.com/photo-1552664730-d307ca884978">
 
 </section>
 
-<!-- JOB LISTINGS -->
+<!-- RESUME BUILDER -->
+
+<section id="resumeBuilder" class="page">
+
+<h2>AI Resume Builder</h2>
+
+<div class="form-box">
+
+<input placeholder="Skills">
+<input placeholder="Projects">
+<input placeholder="Experience">
+
+<button>Generate Resume</button>
+
+</div>
+
+</section>
+
+<!-- JOBS -->
 
 <section id="jobs" class="page">
 
@@ -144,7 +401,7 @@ src="https://images.unsplash.com/photo-1552664730-d307ca884978">
 
 <p>Company: TechCorp</p>
 
-<p>Skills: HTML, CSS, React</p>
+<p>Skills: HTML CSS React</p>
 
 <button>Apply</button>
 
@@ -156,7 +413,7 @@ src="https://images.unsplash.com/photo-1552664730-d307ca884978">
 
 <p>Company: AI Labs</p>
 
-<p>Skills: Python, Machine Learning</p>
+<p>Skills: Python ML</p>
 
 <button>Apply</button>
 
@@ -166,25 +423,40 @@ src="https://images.unsplash.com/photo-1552664730-d307ca884978">
 
 </section>
 
-<!-- LOGIN -->
+<script>
 
-<section id="login" class="page login">
+function showPage(page){
 
-<div class="login-box">
+let pages=document.querySelectorAll(".page")
 
-<h2>User Login</h2>
+pages.forEach(p=>p.style.display="none")
 
-<input id="email" placeholder="Email">
+document.getElementById(page).style.display="block"
 
-<input type="password" id="password" placeholder="Password">
+}
 
-<button onclick="login()">Login</button>
+function login(){
 
-</div>
+let role=document.getElementById("role").value
 
-</section>
+if(role==="candidate"){
+showPage("candidateDashboard")
+}
 
-<script src="script.js"></script>
+if(role==="recruiter"){
+showPage("jobs")
+}
+
+if(role==="admin"){
+showPage("features")
+}
+
+}
+
+showPage("home")
+
+</script>
 
 </body>
+
 </html>
