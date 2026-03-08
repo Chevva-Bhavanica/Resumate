@@ -1,4 +1,4 @@
-Frontend – AI Resume Screening System
+Frontend – Resumate
 
 This folder contains the Frontend UI of the AI Resume Screening & Job Recommendation System.
 The frontend provides interfaces for Candidates, Recruiters, and Admin and connects to the Python backend APIs.
