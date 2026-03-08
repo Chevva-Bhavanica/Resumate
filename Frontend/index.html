@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Resumate - AI Resume Screening</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<h2 class="logo">Resumate</h2>
+
+<div>
+
+<button onclick="showPage('home')">Home</button>
+<button onclick="showPage('about')">About</button>
+<button onclick="showPage('dashboard')">Dashboard</button>
+<button onclick="showPage('jobs')">Jobs</button>
+<button onclick="showPage('login')">Login</button>
+
+</div>
+
+</nav>
+
+<!-- HOME PAGE -->
+
+<section id="home" class="page hero">
+
+<div class="hero-text">
+
+<h1>AI Powered Resume Screening</h1>
+
+<p>
+Automate recruitment and discover the best candidates
+using intelligent resume analysis.
+</p>
+
+<button onclick="showPage('login')" class="primary-btn">
+Get Started
+</button>
+
+</div>
+
+<img class="hero-img"
+src="https://images.unsplash.com/photo-1552664730-d307ca884978">
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="features page" id="about">
+
+<h2>Platform Features</h2>
+
+<div class="feature-grid">
+
+<div class="feature-card">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+<h3>AI Resume Screening</h3>
+
+<p>Automatically rank candidates using intelligent skill matching.</p>
+
+</div>
+
+<div class="feature-card">
+
+<img src="https://cdn-icons-png.flaticon.com/512/9068/9068753.png">
+
+<h3>Resume Builder</h3>
+
+<p>Create professional resumes using AI-generated templates.</p>
+
+</div>
+
+<div class="feature-card">
+
+<img src="https://cdn-icons-png.flaticon.com/512/747/747376.png">
+
+<h3>Job Recommendations</h3>
+
+<p>Get personalized job suggestions based on your skills.</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="page dashboard">
+
+<h2>Candidate Dashboard</h2>
+
+<div class="stats">
+
+<div class="stat-card">
+
+<h3>Profile Completion</h3>
+<p>80%</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3>Jobs Applied</h3>
+<p>12</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3>AI Recommendations</h3>
+<p>8</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- JOB LISTINGS -->
+
+<section id="jobs" class="page">
+
+<h2>Job Opportunities</h2>
+
+<div class="job-grid">
+
+<div class="job-card">
+
+<h3>Frontend Developer</h3>
+
+<p>Company: TechCorp</p>
+
+<p>Skills: HTML, CSS, React</p>
+
+<button>Apply</button>
+
+</div>
+
+<div class="job-card">
+
+<h3>AI Engineer</h3>
+
+<p>Company: AI Labs</p>
+
+<p>Skills: Python, Machine Learning</p>
+
+<button>Apply</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- LOGIN -->
+
+<section id="login" class="page login">
+
+<div class="login-box">
+
+<h2>User Login</h2>
+
+<input id="email" placeholder="Email">
+
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
