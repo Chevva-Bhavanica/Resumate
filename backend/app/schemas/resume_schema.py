@@ -48,3 +48,11 @@ class ResumeSummaryResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+# ----------------------------
+# Resume Builder Request
+# ----------------------------
+class ResumeBuilderRequest(BaseModel):
+    skills: str
+    projects: str
+    experience: str

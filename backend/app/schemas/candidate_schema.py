@@ -56,3 +56,11 @@ class PublicCandidateProfile(BaseModel):
     skills: List[str]
     location: Optional[str] = None
     bio: Optional[str] = None
+
+# --------------------------------------------------
+# Candidate Dashboard Stats
+# --------------------------------------------------
+class CandidateDashboardStats(BaseModel):
+    profile_completion: int
+    jobs_applied: int
+    ai_matches: int

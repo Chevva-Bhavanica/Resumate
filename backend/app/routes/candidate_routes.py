@@ -5,11 +5,11 @@ from sqlalchemy.orm import Session
 from typing import List
 
 from app.controllers.candidate_controller import (
-    create_candidate, update_candidate, get_candidate
+    create_candidate, update_candidate, get_candidate, get_dashboard_stats
 )
-from app.schemas.candidate_schema import CandidateCreate, CandidateUpdate, CandidateResponse
+from app.schemas.candidate_schema import CandidateCreate, CandidateUpdate, CandidateResponse, CandidateDashboardStats
 from app.dependencies import get_db
-from app.middleware.auth_middleware import get_current_user, require_role
+from app.dependencies import get_current_user, require_role
 
 router = APIRouter(prefix="/candidates", tags=["Candidates"])
 
@@ -51,3 +51,28 @@ def get_profile(
     current_user = Depends(get_current_user)
 ):
     return get_candidate(candidate_id, db)
+
+# --------------------------------------------------
+# Get Dashboard Stats
+# --------------------------------------------------
+@router.get("/me/dashboard/stats", response_model=CandidateDashboardStats)
+def get_stats(
+    db: Session = Depends(get_db),
+    current_user = Depends(require_role("candidate"))
+):
+    return get_dashboard_stats(str(current_user.id), db)
+
+# --------------------------------------------------
+# Build Resume PDF
+# --------------------------------------------------
+from fastapi.responses import FileResponse
+from app.utils.pdf_generator import generate_resume_pdf
+from app.schemas.resume_schema import ResumeBuilderRequest
+
+@router.post("/me/resume/build", response_class=FileResponse)
+def build_resume_pdf(
+    data: ResumeBuilderRequest,
+    current_user = Depends(require_role("candidate"))
+):
+    pdf_path = generate_resume_pdf(data.dict(), current_user.name)
+    return FileResponse(pdf_path, media_type="application/pdf", filename=f"{current_user.name}_Resume.pdf")

@@ -22,4 +22,3 @@ class Recruiter(Base):
 
     # Relationships
     user = relationship("User", backref="recruiter_profile")
-    jobs_posted = relationship("Job", back_populates="recruiter")

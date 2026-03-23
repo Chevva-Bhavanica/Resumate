@@ -1,4 +1,4 @@
-pip install python-jose
+
 # app/utils/jwt_handler.py
 
 from jose import JWTError, jwt

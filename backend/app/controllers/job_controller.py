@@ -2,6 +2,7 @@
 
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
+from typing import List
 
 from app.models.job_model import Job
 from app.schemas.job_schema import JobCreate, JobUpdate, JobResponse
@@ -49,3 +50,9 @@ def get_job(job_id: str, db: Session) -> JobResponse:
     if not job:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Job not found")
     return job
+
+# --------------------------------------------------
+# Get All Jobs
+# --------------------------------------------------
+def get_all_jobs(db: Session, skip: int = 0, limit: int = 100) -> List[Job]:
+    return db.query(Job).filter(Job.is_active == True).offset(skip).limit(limit).all()

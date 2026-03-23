@@ -42,7 +42,11 @@ def parse_resume(file: UploadFile, user: User, db: Session):
 def generate_resume_summary(file: UploadFile, user: User, db: Session):
     saved_path = save_file(file)
     
-    summary_text = generate_summary(saved_path)
+    # Extract text before summarizing
+    from app.services.resume_parser import extract_resume_text
+    resume_text = extract_resume_text(saved_path)
+    
+    summary_text = generate_summary(resume_text)
     
     # Optionally save summary in DB
     resume_summary_record = Resume(
@@ -63,8 +67,34 @@ def recommend_jobs_for_candidate(user: User, db: Session) -> List[Job]:
     # Fetch user resumes
     resumes = db.query(Resume).filter(Resume.user_id == user.id).all()
     
-    # Pass resumes or skills to recommendation engine
-    recommended_job_ids = recommend_jobs(resumes, db)
+    candidate_skills = []
+    for r in resumes:
+        if r.extracted_data and "skills" in r.extracted_data:
+            candidate_skills.extend(r.extracted_data["skills"])
+            
+    # Also get skills from candidate profile if present
+    from app.models.candidate_model import Candidate
+    candidate = db.query(Candidate).filter(Candidate.user_id == user.id).first()
+    if candidate and candidate.skills:
+        candidate_skills.extend(candidate.skills.split(","))
+        
+    candidate_skills = list(set(candidate_skills))
     
-    jobs = db.query(Job).filter(Job.id.in_(recommended_job_ids)).all()
-    return jobs
+    # Fetch all active jobs
+    all_jobs = db.query(Job).filter(Job.is_active == True).all()
+    jobs_dict = [
+        {"id": str(job.id), "title": job.title, "description": job.description, "obj": job}
+        for job in all_jobs
+    ]
+    
+    # Recommend
+    recommended_dicts = recommend_jobs(candidate_skills, jobs_dict)
+    
+    # Return sorted jobs
+    # Only return top match score jobs
+    sorted_jobs = []
+    for rd in recommended_dicts:
+        if rd.get("match_score", 0) > 0.1: # Threshold
+            sorted_jobs.append(rd["obj"])
+            
+    return sorted_jobs

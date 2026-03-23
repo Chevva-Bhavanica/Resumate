@@ -3,459 +3,617 @@
 
 <head>
 
-<title>Resumate - AI Resume Screening</title>
+    <title>Resumate - AI Resume Screening</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-<style>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: #f4f7ff;
+        }
 
-body{
-font-family:'Poppins',sans-serif;
-margin:0;
-background:#f4f7ff;
-}
+        /* NAVBAR */
 
-/* NAVBAR */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-background:white;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
-position:sticky;
-top:0;
-z-index:100;
-}
+        .logo {
+            color: #4f46e5;
+        }
 
-.logo{
-color:#4f46e5;
-}
+        nav button {
+            margin-left: 15px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-nav button{
-margin-left:15px;
-background:none;
-border:none;
-font-size:16px;
-cursor:pointer;
-}
+        nav button:hover {
+            color: #4f46e5;
+        }
 
-nav button:hover{
-color:#4f46e5;
-}
+        /* HERO */
 
-/* HERO */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px;
+            background: linear-gradient(120deg, #4f46e5, #6366f1);
+            color: white;
+            animation: fadeIn 1s;
+        }
 
-.hero{
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:80px;
-background:linear-gradient(120deg,#4f46e5,#6366f1);
-color:white;
-animation:fadeIn 1s;
-}
+        .hero img {
+            width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
 
-.hero img{
-width:400px;
-border-radius:20px;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
-}
+        .primary-btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: white;
+            color: #4f46e5;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-.primary-btn{
-margin-top:20px;
-padding:12px 25px;
-background:white;
-color:#4f46e5;
-border:none;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
-}
+        .primary-btn:hover {
+            transform: scale(1.05);
+        }
 
-.primary-btn:hover{
-transform:scale(1.05);
-}
+        /* FEATURES */
 
-/* FEATURES */
+        .features {
+            padding: 80px;
+            text-align: center;
+            animation: fadeIn 1s;
+        }
 
-.features{
-padding:80px;
-text-align:center;
-animation:fadeIn 1s;
-}
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
 
-.feature-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:30px;
-margin-top:40px;
-}
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: 0.4s;
+            cursor: pointer;
+        }
 
-.feature-card{
-background:white;
-padding:30px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
-transition:0.4s;
-cursor:pointer;
-}
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
 
-.feature-card:hover{
-transform:translateY(-10px) scale(1.05);
-}
+        .feature-card img {
+            width: 80px;
+        }
 
-.feature-card img{
-width:80px;
-}
+        /* FORM */
 
-/* FORM */
+        .form-box {
+            background: white;
+            padding: 40px;
+            width: 300px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.8s;
+        }
 
-.form-box{
-background:white;
-padding:40px;
-width:300px;
-margin:auto;
-border-radius:10px;
-box-shadow:0 5px 20px rgba(0,0,0,0.15);
-animation:fadeIn 0.8s;
-}
+        .form-box input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+        }
 
-.form-box input,select{
-width:100%;
-padding:10px;
-margin-top:15px;
-}
+        .form-box button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+        }
 
-.form-box button{
-margin-top:20px;
-width:100%;
-padding:10px;
-background:#4f46e5;
-color:white;
-border:none;
-}
+        /* DASHBOARD */
 
-/* DASHBOARD */
+        .dashboard {
+            padding: 60px;
+            animation: fadeIn 1s;
+        }
 
-.dashboard{
-padding:60px;
-animation:fadeIn 1s;
-}
+        .stats {
+            display: flex;
+            gap: 30px;
+        }
 
-.stats{
-display:flex;
-gap:30px;
-}
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
+            transition: 0.3s;
+        }
 
-.stat-card{
-background:white;
-padding:30px;
-border-radius:10px;
-box-shadow:0 4px 15px rgba(0,0,0,0.1);
-width:200px;
-text-align:center;
-transition:0.3s;
-}
+        .stat-card:hover {
+            transform: scale(1.08);
+        }
 
-.stat-card:hover{
-transform:scale(1.08);
-}
+        /* JOB CARDS */
 
-/* JOB CARDS */
+        .job-grid {
+            display: flex;
+            gap: 30px;
+            padding: 40px;
+        }
 
-.job-grid{
-display:flex;
-gap:30px;
-padding:40px;
-}
+        .job-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            transition: 0.3s;
+        }
 
-.job-card{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 4px 15px rgba(0,0,0,0.1);
-width:250px;
-transition:0.3s;
-}
+        .job-card:hover {
+            transform: scale(1.05);
+        }
 
-.job-card:hover{
-transform:scale(1.05);
-}
+        /* PAGE CONTROL */
 
-/* PAGE CONTROL */
+        .page {
+            display: none;
+            padding: 40px;
+        }
 
-.page{
-display:none;
-padding:40px;
-}
+        /* ANIMATION */
 
-/* ANIMATION */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
 
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;transform:translateY(0);}
-}
-
-</style>
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+    <!-- NAVBAR -->
 
-<nav>
+    <nav>
 
-<h2 class="logo">Resumate</h2>
+        <h2 class="logo">Resumate</h2>
 
-<div>
+        <div>
 
-<button onclick="showPage('home')">Home</button>
-<button onclick="showPage('features')">Features</button>
-<button onclick="showPage('login')">Login</button>
-<button onclick="showPage('register')">Register</button>
+            <button onclick="showPage('home')">Home</button>
+            <button onclick="showPage('features')">Features</button>
+            <button onclick="showPage('login')">Login</button>
+            <button onclick="showPage('register')">Register</button>
 
-</div>
+        </div>
 
-</nav>
+    </nav>
 
-<!-- HOME -->
+    <!-- HOME -->
 
-<section id="home" class="page hero">
+    <section id="home" class="page hero">
 
-<div>
+        <div>
 
-<h1>AI Powered Resume Screening</h1>
+            <h1>AI Powered Resume Screening</h1>
 
-<p>
-Automate recruitment and discover the best candidates using intelligent resume analysis.
-</p>
+            <p>
+                Automate recruitment and discover the best candidates using intelligent resume analysis.
+            </p>
 
-<button class="primary-btn" onclick="showPage('login')">
-Get Started
-</button>
+            <button class="primary-btn" onclick="showPage('login')">
+                Get Started
+            </button>
 
-</div>
+        </div>
 
-<img src="https://images.unsplash.com/photo-1552664730-d307ca884978">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978">
 
-</section>
+    </section>
 
-<!-- FEATURES -->
+    <!-- FEATURES -->
 
-<section id="features" class="page features">
+    <section id="features" class="page features">
 
-<h2>Platform Features</h2>
+        <h2>Platform Features</h2>
 
-<div class="feature-grid">
+        <div class="feature-grid">
 
-<div class="feature-card" onclick="showPage('resumeBuilder')">
+            <div class="feature-card" onclick="showPage('resumeBuilder')">
 
-<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
 
-<h3>AI Resume Builder</h3>
+                <h3>AI Resume Builder</h3>
 
-<p>Create resumes automatically using AI.</p>
+                <p>Create resumes automatically using AI.</p>
 
-</div>
+            </div>
 
-<div class="feature-card" onclick="showPage('jobs')">
+            <div class="feature-card" onclick="showPage('jobs')">
 
-<img src="https://cdn-icons-png.flaticon.com/512/747/747376.png">
+                <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png">
 
-<h3>Job Recommendations</h3>
+                <h3>Job Recommendations</h3>
 
-<p>Get jobs matching your skills.</p>
+                <p>Get jobs matching your skills.</p>
 
-</div>
+            </div>
 
-<div class="feature-card" onclick="showPage('candidateDashboard')">
+            <div class="feature-card" onclick="showPage('candidateDashboard')">
 
-<img src="https://cdn-icons-png.flaticon.com/512/9068/9068753.png">
+                <img src="https://cdn-icons-png.flaticon.com/512/9068/9068753.png">
 
-<h3>Smart Dashboard</h3>
+                <h3>Smart Dashboard</h3>
 
-<p>Track applications and recommendations.</p>
+                <p>Track applications and recommendations.</p>
 
-</div>
+            </div>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
-<!-- LOGIN -->
+    <!-- LOGIN -->
 
-<section id="login" class="page">
+    <section id="login" class="page">
 
-<div class="form-box">
+        <div class="form-box">
 
-<h2>User Login</h2>
+            <h2>User Login</h2>
 
-<input placeholder="Email">
+            <input id="loginEmail" placeholder="Email">
 
-<input type="password" placeholder="Password">
+            <input id="loginPassword" type="password" placeholder="Password">
 
-<select id="role">
+            <select id="role">
 
-<option value="candidate">Candidate</option>
-<option value="recruiter">Recruiter</option>
-<option value="admin">Admin</option>
+                <option value="candidate">Candidate</option>
+                <option value="recruiter">Recruiter</option>
+                <option value="admin">Admin</option>
 
-</select>
+            </select>
 
-<button onclick="login()">Login</button>
+            <button onclick="login()">Login</button>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
-<!-- REGISTER -->
+    <!-- REGISTER -->
 
-<section id="register" class="page">
+    <section id="register" class="page">
 
-<div class="form-box">
+        <div class="form-box">
 
-<h2>Register</h2>
+            <h2>Register</h2>
 
-<input placeholder="Name">
-<input placeholder="Email">
-<input type="password" placeholder="Password">
+            <input id="regName" placeholder="Name">
+            <input id="regEmail" placeholder="Email">
+            <input id="regPassword" type="password" placeholder="Password">
 
-<select>
+            <select id="regRole">
 
-<option>Candidate</option>
-<option>Recruiter</option>
+                <option value="candidate">Candidate</option>
+                <option value="recruiter">Recruiter</option>
 
-</select>
+            </select>
 
-<button>Register</button>
+            <button onclick="registerUser()">Register</button>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
-<!-- CANDIDATE DASHBOARD -->
+    <!-- CANDIDATE DASHBOARD -->
 
-<section id="candidateDashboard" class="page dashboard">
+    <section id="candidateDashboard" class="page dashboard">
 
-<h2>Candidate Dashboard</h2>
+        <h2>Candidate Dashboard</h2>
 
-<div class="stats">
+        <div class="stats">
 
-<div class="stat-card">
+            <div class="stat-card">
 
-<h3>Profile Completion</h3>
-<p>80%</p>
+                <h3>Profile Completion</h3>
+                <p id="statCompletion">0%</p>
 
-</div>
+            </div>
 
-<div class="stat-card">
+            <div class="stat-card">
 
-<h3>Jobs Applied</h3>
-<p>12</p>
+                <h3>Jobs Applied</h3>
+                <p id="statJobsApplied">0</p>
 
-</div>
+            </div>
 
-<div class="stat-card">
+            <div class="stat-card">
 
-<h3>AI Matches</h3>
-<p>6</p>
+                <h3>AI Matches</h3>
+                <p id="statAiMatches">0</p>
 
-</div>
+            </div>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
-<!-- RESUME BUILDER -->
+    <!-- RESUME BUILDER -->
 
-<section id="resumeBuilder" class="page">
+    <section id="resumeBuilder" class="page">
 
-<h2>AI Resume Builder</h2>
+        <h2>AI Resume Builder</h2>
 
-<div class="form-box">
+        <div class="form-box">
 
-<input placeholder="Skills">
-<input placeholder="Projects">
-<input placeholder="Experience">
+            <input id="buildSkills" placeholder="Skills">
+            <input id="buildProjects" placeholder="Projects">
+            <input id="buildExperience" placeholder="Experience">
 
-<button>Generate Resume</button>
+            <button onclick="generateResume()">Generate Resume</button>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
-<!-- JOBS -->
+    <!-- JOBS -->
 
-<section id="jobs" class="page">
+    <section id="jobs" class="page">
 
-<h2>Job Opportunities</h2>
+        <h2>Job Opportunities</h2>
 
-<div class="job-grid">
+        <div class="job-grid">
 
-<div class="job-card">
+            <div class="job-card">
 
-<h3>Frontend Developer</h3>
+                <h3>Frontend Developer</h3>
 
-<p>Company: TechCorp</p>
+                <p>Company: TechCorp</p>
 
-<p>Skills: HTML CSS React</p>
+                <p>Skills: HTML CSS React</p>
 
-<button>Apply</button>
+                <button>Apply</button>
 
-</div>
+            </div>
 
-<div class="job-card">
+            <div class="job-card">
 
-<h3>AI Engineer</h3>
+                <h3>AI Engineer</h3>
 
-<p>Company: AI Labs</p>
+                <p>Company: AI Labs</p>
 
-<p>Skills: Python ML</p>
+                <p>Skills: Python ML</p>
 
-<button>Apply</button>
+                <button>Apply</button>
 
-</div>
+            </div>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
-<script>
+    <script>
 
-function showPage(page){
+        function showPage(page) {
 
-let pages=document.querySelectorAll(".page")
+            let pages = document.querySelectorAll(".page")
 
-pages.forEach(p=>p.style.display="none")
+            pages.forEach(p => p.style.display = "none")
 
-document.getElementById(page).style.display="block"
+            document.getElementById(page).style.display = "block"
 
-}
+            if (page === "jobs") {
+                loadJobs();
+            } else if (page === "candidateDashboard") {
+                loadCandidateDashboard();
+            }
+        }
 
-function login(){
+        const API_BASE = "http://127.0.0.1:8000";
 
-let role=document.getElementById("role").value
+        async function loadJobs() {
+            try {
+                const token = localStorage.getItem("token");
+                const res = await fetch(`${API_BASE}/jobs/`, {
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const jobs = await res.json();
+                    const container = document.querySelector(".job-grid");
+                    container.innerHTML = "";
+                    if (jobs.length === 0) {
+                        container.innerHTML = "<p>No jobs available.</p>";
+                    }
+                    jobs.forEach(job => {
+                        let skills = job.required_skills && job.required_skills.length ? job.required_skills.join(", ") : "N/A";
+                        container.innerHTML += `
+                            <div class="job-card">
+                                <h3>${job.title}</h3>
+                                <p>Company: Resumate (Internal)</p>
+                                <p>Skills: ${skills}</p>
+                                <button onclick="applyJob('${job.id}')">Apply</button>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (err) {
+                console.error("Failed to load jobs", err);
+            }
+        }
 
-if(role==="candidate"){
-showPage("candidateDashboard")
-}
+        async function loadCandidateDashboard() {
+            try {
+                const token = localStorage.getItem("token");
+                const res = await fetch(`${API_BASE}/candidates/me/dashboard/stats`, {
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const stats = await res.json();
+                    document.getElementById("statCompletion").innerText = `${stats.profile_completion}%`;
+                    document.getElementById("statJobsApplied").innerText = `${stats.jobs_applied}`;
+                    document.getElementById("statAiMatches").innerText = `${stats.ai_matches}`;
+                }
+            } catch (err) {
+                console.error("Failed to load dashboard stats", err);
+            }
+        }
 
-if(role==="recruiter"){
-showPage("jobs")
-}
+        async function applyJob(jobId) {
+            const token = localStorage.getItem("token");
+            try {
+                const res = await fetch(`${API_BASE}/applications/`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ job_id: jobId })
+                });
+                if (res.ok) {
+                    alert("Applied successfully!");
+                } else {
+                    const err = await res.json();
+                    alert("Application failed: " + err.detail);
+                }
+            } catch (error) {
+                alert("Error connecting to server.");
+            }
+        }
 
-if(role==="admin"){
-showPage("features")
-}
+        async function generateResume() {
+            const skills = document.getElementById("buildSkills").value;
+            const projects = document.getElementById("buildProjects").value;
+            const experience = document.getElementById("buildExperience").value;
+            const token = localStorage.getItem("token");
 
-}
+            try {
+                const res = await fetch(`${API_BASE}/candidates/me/resume/build`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ skills, projects, experience })
+                });
 
-showPage("home")
+                if (res.ok) {
+                    const blob = await res.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "Resume.pdf";
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                } else {
+                    alert("Failed to build resume.");
+                }
+            } catch (err) {
+                console.error("Error building resume:", err);
+                alert("Error connecting to server.");
+            }
+        }
 
-</script>
+        async function login() {
+
+            let email = document.getElementById("loginEmail").value;
+            let password = document.getElementById("loginPassword").value;
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/login`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    localStorage.setItem("token", data.access_token);
+                    localStorage.setItem("userRole", data.role);
+                    alert("Login successful!");
+
+                    if (data.role === "candidate") {
+                        showPage("candidateDashboard");
+                    } else if (data.role === "recruiter") {
+                        showPage("jobs");
+                    } else {
+                        showPage("features");
+                    }
+                } else {
+                    const err = await res.json();
+                    alert("Login failed: " + err.detail);
+                }
+            } catch (error) {
+                alert("Error connecting to server.");
+            }
+
+        }
+
+        async function registerUser() {
+            let name = document.getElementById("regName").value;
+            let email = document.getElementById("regEmail").value;
+            let password = document.getElementById("regPassword").value;
+            let role = document.getElementById("regRole").value;
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/register`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, password, role })
+                });
+
+                if (res.ok) {
+                    alert("Registration successful! Please login.");
+                    showPage("login");
+                } else {
+                    const err = await res.json();
+                    alert("Registration failed: " + err.detail);
+                }
+            } catch (error) {
+                alert("Error connecting to server. Please check your console.");
+            }
+        }
+
+        showPage("home")
+
+    </script>
 
 </body>
 

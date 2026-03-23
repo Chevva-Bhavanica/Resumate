@@ -53,3 +53,27 @@ def get_candidate(candidate_id: str, db: Session) -> CandidateResponse:
     if not candidate:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Candidate not found")
     return candidate
+
+# --------------------------------------------------
+# Get Candidate Dashboard Stats
+# --------------------------------------------------
+def get_dashboard_stats(user_id: str, db: Session) -> dict:
+    candidate = db.query(Candidate).filter(Candidate.user_id == user_id).first()
+    if not candidate:
+        return {"profile_completion": 0, "jobs_applied": 0, "ai_matches": 0}
+    
+    # Simple profile completion logic: if they have phone, location, bio, skills
+    fields = [candidate.phone, candidate.location, candidate.bio, candidate.skills]
+    filled = sum([1 for f in fields if f])
+    completion = int((filled / len(fields)) * 100) if fields else 0
+
+    jobs_applied = len(candidate.applications)
+    
+    # AI matches can be a mockup for now, since we haven't implemented matching algorithm yet
+    ai_matches = 0
+
+    return {
+        "profile_completion": completion,
+        "jobs_applied": jobs_applied,
+        "ai_matches": ai_matches
+    }

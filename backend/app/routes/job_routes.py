@@ -4,10 +4,10 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import List
 
-from app.controllers.job_controller import create_job, update_job, get_job
+from app.controllers.job_controller import create_job, update_job, get_job, get_all_jobs
 from app.schemas.job_schema import JobCreate, JobUpdate, JobResponse
 from app.dependencies import get_db
-from app.middleware.auth_middleware import get_current_user, require_role
+from app.dependencies import get_current_user, require_role
 
 router = APIRouter(prefix="/jobs", tags=["Jobs"])
 
@@ -48,3 +48,15 @@ def get_job_detail(
     current_user = Depends(get_current_user)
 ):
     return get_job(job_id, db)
+
+# --------------------------------------------------
+# Get All Jobs
+# --------------------------------------------------
+@router.get("/", response_model=List[JobResponse])
+def list_jobs(
+    skip: int = 0,
+    limit: int = 100,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user)
+):
+    return get_all_jobs(db, skip=skip, limit=limit)

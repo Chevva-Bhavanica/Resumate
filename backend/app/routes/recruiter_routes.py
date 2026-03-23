@@ -8,7 +8,7 @@ from app.controllers.recruiter_controller import (
 )
 from app.schemas.recruiter_schema import RecruiterCreate, RecruiterUpdate, RecruiterResponse
 from app.dependencies import get_db
-from app.middleware.auth_middleware import get_current_user, require_role
+from app.dependencies import get_current_user, require_role
 
 router = APIRouter(prefix="/recruiters", tags=["Recruiters"])
 

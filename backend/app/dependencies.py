@@ -3,22 +3,22 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
-from bson import ObjectId
+from sqlalchemy.orm import Session
 
 from app.config import settings
-from app.database.db_connection import get_database
+from app.database.db_connection import get_db
+from app.models.user_model import User
 
 # OAuth2 scheme for JWT extraction
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
-
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 # -------------------------------------------------
 # Get Current User from JWT
 # -------------------------------------------------
 
-async def get_current_user(
+def get_current_user(
     token: str = Depends(oauth2_scheme),
-    db=Depends(get_database)
+    db: Session = Depends(get_db)
 ):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -40,12 +40,11 @@ async def get_current_user(
     except JWTError:
         raise credentials_exception
 
-    user = await db["users"].find_one({"_id": ObjectId(user_id)})
+    user = db.query(User).filter(User.id == user_id).first()
 
     if user is None:
         raise credentials_exception
 
-    user["id"] = str(user["_id"])
     return user
 
 
@@ -54,8 +53,8 @@ async def get_current_user(
 # -------------------------------------------------
 
 def require_role(required_role: str):
-    async def role_checker(current_user=Depends(get_current_user)):
-        if current_user["role"] != required_role:
+    def role_checker(current_user: User = Depends(get_current_user)):
+        if current_user.role != required_role:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail="Access denied: insufficient permissions"
@@ -63,12 +62,3 @@ def require_role(required_role: str):
         return current_user
 
     return role_checker
-
-
-# -------------------------------------------------
-# Database Dependency
-# -------------------------------------------------
-
-async def get_db():
-    db = await get_database()
-    return db

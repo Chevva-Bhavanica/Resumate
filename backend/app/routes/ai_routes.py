@@ -12,7 +12,7 @@ from app.controllers.ai_controller import (
 from app.schemas.resume_schema import ResumeResponse, ResumeSummaryResponse
 from app.schemas.job_schema import JobResponse
 from app.dependencies import get_db
-from app.middleware.auth_middleware import require_role
+from app.dependencies import require_role
 
 router = APIRouter(prefix="/ai", tags=["AI"])
 

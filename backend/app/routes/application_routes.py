@@ -9,7 +9,7 @@ from app.controllers.application_controller import (
 )
 from app.schemas.application_schema import ApplicationCreate, ApplicationUpdate, ApplicationResponse
 from app.dependencies import get_db
-from app.middleware.auth_middleware import get_current_user, require_role
+from app.dependencies import get_current_user, require_role
 
 router = APIRouter(prefix="/applications", tags=["Applications"])
 
