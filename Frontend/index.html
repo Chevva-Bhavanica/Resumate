@@ -373,6 +373,13 @@
 
         </div>
 
+        <div class="form-box" style="margin-top: 40px; width: 400px;">
+            <h3>Upload Resume to Parse (NLP)</h3>
+            <input type="file" id="resumeUpload" accept=".pdf,.doc,.docx">
+            <button onclick="parseResume()">Upload & Extract Skills</button>
+            <p id="parseResult" style="font-size: 12px; color: #333; margin-top: 10px;"></p>
+        </div>
+
     </section>
 
     <!-- RESUME BUILDER -->
@@ -492,6 +499,36 @@
                 }
             } catch (err) {
                 console.error("Failed to load dashboard stats", err);
+            }
+        }
+
+        async function parseResume() {
+            const fileInput = document.getElementById("resumeUpload");
+            const resultP = document.getElementById("parseResult");
+            if (!fileInput.files.length) {
+                alert("Please select a file first.");
+                return;
+            }
+            const token = localStorage.getItem("token");
+            const formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+
+            resultP.innerText = "Processing with NLP engine...";
+            try {
+                const res = await fetch(`${API_BASE}/ai/parse_resume`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${token}` },
+                    body: formData
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    resultP.innerText = `Extracted NLP Skills:\n${(data.extracted_data.skills || []).join(', ')}\n\nExtracted Orgs:\n${(data.extracted_data.organizations || []).join(', ')}`;
+                    loadCandidateDashboard(); // Refresh matching score
+                } else {
+                    resultP.innerText = "Parsing failed.";
+                }
+            } catch (err) {
+                resultP.innerText = "Error connecting to server.";
             }
         }
 
